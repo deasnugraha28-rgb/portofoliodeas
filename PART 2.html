@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Deas Nugraha</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #08090d;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* BACKGROUND */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #5b21b6;
+            filter: blur(180px);
+            opacity: 0.25;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #00e5ff;
+            filter: blur(180px);
+            opacity: 0.15;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
+        /* NAVBAR */
+        nav {
+            width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 9, 13, 0.75);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00e5ff;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            padding: 150px 8% 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            max-width: 650px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid #00e5ff;
+            border-radius: 30px;
+            color: #00e5ff;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: clamp(45px, 7vw, 85px);
+            line-height: 0.95;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #00e5ff;
+        }
+
+        .hero p {
+            color: #aaa;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 13px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #00e5ff;
+            color: #050609;
+        }
+
+        .secondary {
+            border: 1px solid #444;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        /* 3D OBJECT */
+        .visual {
+            width: 350px;
+            height: 350px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cube {
+            width: 180px;
+            height: 180px;
+            border: 2px solid #00e5ff;
+            transform: rotate(45deg) perspective(500px) rotateX(20deg);
+            box-shadow:
+                0 0 30px #00e5ff,
+                inset 0 0 30px rgba(0,229,255,0.2);
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        .circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes floating {
+            0%,100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            50% {
+                transform: rotate(45deg) translateY(-25px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* SECTION */
+        section {
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #888;
+        }
+
+        /* SKILLS */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .skill-card {
+            padding: 30px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: #00e5ff;
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* PORTFOLIO */
+        .portfolio {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project {
+            height: 260px;
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #111827, #17111f);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.4s;
+        }
+
+        .project::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: #00e5ff;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.3;
+            top: -50px;
+            right: -50px;
+        }
+
+        .project:hover {
+            transform: scale(1.03);
+        }
+
+        .project h3,
+        .project p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project p {
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* ABOUT */
+        .about {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about p {
+            color: #aaa;
+            line-height: 1.9;
+            font-size: 17px;
+        }
+
+        /* CONTACT */
+        .contact {
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #666;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .skills {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            nav ul {
+                display: none;
+            }
+
+            .skills,
+            .portfolio {
+                grid-template-columns: 1fr;
+            }
+
+            .visual {
+                transform: scale(0.8);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">DEAS NUGRAHA<span>.</span></div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hero-text">
+
+            <div class="tag">
+                Visual Designer | 3D CAD | Video Editor
+            </div>
+
+            <h1>
+                MY<br>
+                PORTO<br>
+                <span>FOLIO.</span>
+            </h1>
+
+            <p>
+                Visual designer yang fokus pada desain 2D, 3D, video editing, 
+                dan web development. Saya suka mengubah ide menjadi 
+                karya visual yang kreatif dan menarik.
+            </p>
+
+            <div class="buttons">
+                <a href="#portfolio" class="btn primary">
+                    Lihat Portfolio
+                </a>
+
+                <a href="#contact" class="btn secondary">
+                    Contact Me
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- VISUAL 3D -->
+        <div class="visual">
+
+            <div class="circle"></div>
+
+            <div class="cube"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+    <section id="skills">
+
+        <div class="section-title">
+            <h2>My Skills</h2>
+            <p>Keahlian dan bidang kreatif yang saya kembangkan</p>
+        </div>
+
+        <div class="skills">
+
+            <div class="skill-card">
+                <div class="icon">🎨</div>
+                <h3>2D Design</h3>
+                <p>
+                    Membuat poster, banner, konten media sosial,
+                     layout, dan berbagai kebutuhan visual.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <div class="icon">🧊</div>
+                <h3>3D Design</h3>
+                <p>
+                   Membuat desain dan pemodelan objek 3D menggunakan 
+                   software seperti SolidWorks, AutoCAD, dan Inventor.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <div class="icon">🎬</div>
+                <h3>Video Editing</h3>
+                <p>
+                   Mengolah video dengan editing, transisi, 
+                   motion visual, color adjustment, dan storytelling.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <div class="icon">💻</div>
+                <h3>Web Coding</h3>
+                <p>
+                    Membuat dan mengembangkan 
+                    website menggunakan HTML, CSS, dan JavaScript.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+
+        <div class="section-title">
+            <h2>Selected Works</h2>
+            <p>Beberapa project yang pernah saya kerjakan</p>
+        </div>
+
+        <div class="portfolio">
+
+            <div class="project">
+                <img src="GAMBAR/Desain tanpa jundul (1).png" alt="" width="170">
+                
+                <h3>2D Creative Design</h3>
+                <p>Poster & Social Media Design</p>
+            </div>
+
+            <div class="project">
+                <img src="GAMBAR/sh.png" alt="" width="180">
+                <h3>3D Visualization</h3>
+                <p>3D Modeling & Rendering</p>
+            </div>
+
+            <div class="project">
+                <img src="GAMBAR/Capcut-Logo-PNG-Photos.png" alt="" width="150">
+                <br>
+                <h3>Video Project</h3>
+                <p>Creative Video Editing</p>
+            </div>
+
+            <div class="project">
+                <img src="GAMBAR/Desain tanpa judul (1).png" alt="" width="170">
+                <h3>Web Portfolio</h3>
+                <p>HTML & CSS Website</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about">
+
+        <div class="section-title">
+            <h2>About Me</h2>
+        </div>
+
+        <div class="about">
+
+            <p>
+                Membantu mengubah ide kompleks menjadi karya visual yang efektif.
+                 Dengan kombinasi keahlian desain 2D, 3D modelling, video editing, 
+                 dan web development, saya berfokus menciptakan solusi kreatif yang tidak hanya estetik,
+                 tetapi juga mudah dipahami oleh audiens.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact">
+
+        <div class="contact">
+
+            <h2>Let's Create Something</h2>
+
+            <p>
+                Punya project atau ingin berkolaborasi?
+            </p>
+
+            <a href="https://wa.me/625716101816"
+               class="btn primary">
+                Contact Me
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 DEAS NUGRAHA. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
